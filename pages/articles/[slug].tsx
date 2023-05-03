@@ -1,10 +1,10 @@
 import ArticleMeta from '@/components/ArticleMeta';
 import Layout from '@/components/Layout';
-import { Params } from '@/types/types';
+import { ArticleProps, Params } from '@/types/types';
 import { sampleCards } from '@/utils/sample';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
-const Article = ({ page }) => {
+const Article: NextPage<ArticleProps> = ({ page }) => {
   return (
     <Layout>
       <article className='w-full'>

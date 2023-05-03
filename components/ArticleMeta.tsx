@@ -1,6 +1,8 @@
+import { ArticleMetaProps } from '@/types/types';
 import Image from 'next/image';
+import { FC } from 'react';
 
-const ArticleMeta = ({ page }) => {
+const ArticleMeta: FC<ArticleMetaProps> = ({ page }) => {
   return (
     <>
       {/* page cover */}
