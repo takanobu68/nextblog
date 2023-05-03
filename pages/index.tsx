@@ -13,8 +13,8 @@ const Home: NextPage<IndexProps> = ({ pages }) => {
         <h1 className='text-5xl mb-8'>{siteConfig.title}</h1>
         <div className='grid md:gap-6 mt-10 md:grid-cols-2 w-full my-12'>
           {/* Card */}
-          {pages.map((page) => (
-            <Card page={page} />
+          {pages.map((page, index) => (
+            <Card key={index} page={page} />
           ))}
         </div>
       </div>
