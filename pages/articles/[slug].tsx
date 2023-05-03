@@ -1,6 +1,7 @@
 import ArticleMeta from '@/components/ArticleMeta';
 import Layout from '@/components/Layout';
 import { ArticleProps, Params } from '@/types/types';
+import { fetchBlocksByPageId, fetchPage } from '@/utils/notion';
 import { sampleCards } from '@/utils/sample';
 import { GetStaticProps, NextPage } from 'next';
 
@@ -24,12 +25,17 @@ export default Article;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as Params;
+  const { results } = await fetchPage({ slug });
+  const page = results[0];
+  const pageId = page.id;
 
-  const page = sampleCards.find((data) => data.slug === slug);
+  const { results: blocks } = await fetchBlocksByPageId(pageId);
 
   return {
     props: {
       page,
+      blocks,
     },
+    revalidate: 10,
   };
 };
