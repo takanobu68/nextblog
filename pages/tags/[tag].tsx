@@ -1,15 +1,16 @@
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import { siteConfig } from '@/site.config';
-import { IndexProps, Params } from '@/types/types';
+import { IndexProps, Params, TagProps } from '@/types/types';
 import { fetchPages } from '@/utils/notion';
-import { GetStaticProps, NextPage } from 'next';
+import { getMultiSelect } from '@/utils/property';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-const Tag: NextPage<IndexProps> = ({ pages }) => {
+const Tag: NextPage<TagProps> = ({ pages, tag }) => {
   return (
     <Layout>
       <div className='pt-12'>
-        <h1 className='text-5xl mb-8'>{siteConfig.title}</h1>
+        <h1 className='text-5xl mb-8'>{`#${tag}`}</h1>
         <div className='grid md:gap-6 mt-10 md:grid-cols-2 w-full my-12'>
           {/* Card */}
           {pages.map((page, index) => (
@@ -19,6 +20,30 @@ const Tag: NextPage<IndexProps> = ({ pages }) => {
       </div>
     </Layout>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { results }: { results: Record<string, any>[] } = await fetchPages({});
+
+  const pathSet: Set<string> = new Set();
+  for (const page of results) {
+    for (const tag of getMultiSelect(page.properties.tags.multi_select)) {
+      pathSet.add(tag);
+    }
+  }
+
+  const paths = Array.from(pathSet).map((tag) => {
+    return {
+      params: {
+        tag,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: 'blocking',
+  };
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
