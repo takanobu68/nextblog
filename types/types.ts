@@ -15,12 +15,8 @@ export type PageProps = {
   content: string;
 };
 
-export type CardProps = {
-  page: PageProps;
-};
-
+export type CardProps = { page: PageType };
 export type ArticleProps = CardProps;
-
 export type ArticleMetaProps = CardProps;
 
 export type IndexProps = { pages: PageType[] };
@@ -36,17 +32,17 @@ export type FileType = {
 
 export type AnnotationType = {
   bold: boolean;
+  code: boolean;
   italic: boolean;
   strikethrough: boolean;
   underline: boolean;
-  code: boolean;
   color: string;
 };
 
 export type RichTextType = {
   plain_text: string;
   href: string | null;
-  annotation: AnnotationType;
+  annotations: AnnotationType;
 };
 
 export type PropertyType = {
@@ -61,5 +57,6 @@ export type PropertyType = {
 export type PageType = {
   id: string;
   cover: FileType | null;
+  // properties: Record<string, any>;
   properties: PropertyType;
 };
