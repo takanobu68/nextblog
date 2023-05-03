@@ -2,8 +2,7 @@ import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import { siteConfig } from '@/site.config';
 import { IndexProps } from '@/types/types';
-import { fetchPage } from '@/utils/notion';
-import { sampleCards } from '@/utils/sample';
+import { fetchPages } from '@/utils/notion';
 import { GetStaticProps, NextPage } from 'next';
 
 const Home: NextPage<IndexProps> = ({ pages }) => {
@@ -23,7 +22,7 @@ const Home: NextPage<IndexProps> = ({ pages }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { results } = await fetchPage();
+  const { results } = await fetchPages({});
 
   return {
     props: {
