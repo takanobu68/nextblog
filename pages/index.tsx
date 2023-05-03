@@ -23,7 +23,7 @@ const Home: NextPage<IndexProps> = ({ pages }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { results } = await fetchPage();
+  const { results } = await fetchPage({});
 
   return {
     props: {
