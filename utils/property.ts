@@ -26,3 +26,13 @@ export const getDate = (date: { start: string }) => {
   }
   return '-';
 };
+
+// tagの取得
+export const getMultiSelect = (multiSelect: [{ name: string }]) => {
+  try {
+    return multiSelect.map((tag) => tag.name);
+  } catch (err) {
+    console.log(err);
+  }
+  return [];
+};
