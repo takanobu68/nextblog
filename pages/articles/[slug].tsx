@@ -6,11 +6,9 @@ import { fetchBlocksByPageId, fetchPages } from '@/utils/notion';
 import { getText } from '@/utils/property';
 import { sampleCards } from '@/utils/sample';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import NotionBlocks from 'notion-block-renderer';
 
 const Article: NextPage<ArticleProps> = ({ page, blocks }) => {
-  console.log('page: ', page);
-  console.log('blocks: ', blocks);
-
   return (
     <Layout>
       <article className='w-full'>
@@ -20,10 +18,13 @@ const Article: NextPage<ArticleProps> = ({ page, blocks }) => {
         </div>
 
         {/* article */}
-        <div className='my-12'>
+        {/* <div className='my-12'>
           {blocks.map((block, index) => (
             <Block key={index} block={block} />
           ))}
+        </div> */}
+        <div className='my-12'>
+          <NotionBlocks blocks={blocks} />
         </div>
       </article>
     </Layout>
