@@ -16,3 +16,13 @@ export const getCover = (cover: PageType['cover']) => {
   if (cover && cover.external) return cover.external.url;
   return '/noimage.png';
 };
+
+// 日付の取得
+export const getDate = (date: { start: string }) => {
+  try {
+    return date.start;
+  } catch (err) {
+    console.log(err);
+  }
+  return '-';
+};
