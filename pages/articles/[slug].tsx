@@ -1,19 +1,20 @@
 import ArticleMeta from '@/components/ArticleMeta';
 import Layout from '@/components/Layout';
 import { Params } from '@/types/types';
+import { sampleCards } from '@/utils/sample';
 import { GetServerSideProps } from 'next';
 
-const Article = ({ slug }) => {
+const Article = ({ page }) => {
   return (
     <Layout>
       <article className='w-full'>
         {/* meta section */}
         <div className='my-12'>
-          <ArticleMeta />
+          <ArticleMeta page={page} />
         </div>
 
         {/* article */}
-        <div className='my-12'>article</div>
+        <div className='my-12'>article {page.content}</div>
       </article>
     </Layout>
   );
@@ -23,9 +24,12 @@ export default Article;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { slug } = ctx.params as Params;
+
+  const page = sampleCards.find((data) => data.slug === slug);
+
   return {
     props: {
-      slug,
+      page,
     },
   };
 };
