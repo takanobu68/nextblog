@@ -23,6 +23,8 @@ export type ArticleProps = CardProps;
 
 export type ArticleMetaProps = CardProps;
 
+export type IndexProps = { pages: PageType[] };
+
 export type Params = ParsedUrlQuery & {
   slug: string;
 };
