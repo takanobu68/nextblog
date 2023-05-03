@@ -28,8 +28,11 @@ export type IndexProps = { pages: PageType[] };
 
 export type BlockProps = { block: BlockType };
 
+export type TagProps = IndexProps & { tag: string };
+
 export type Params = ParsedUrlQuery & {
-  slug: string;
+  slug?: string;
+  tag?: string;
 };
 
 export type FileType = {
