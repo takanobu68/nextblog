@@ -3,7 +3,7 @@ import { Client } from '@notionhq/client';
 const notion = new Client({ auth: process.env.NOTION_KEY as string });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID as string;
 
-export const fetchPage = async ({ slug }: { slug?: string }) => {
+export const fetchPages = async ({ slug }: { slug?: string }) => {
   const and: any = [
     {
       property: 'isPublic',
@@ -23,7 +23,7 @@ export const fetchPage = async ({ slug }: { slug?: string }) => {
     and.push({
       property: 'slug',
       rich_text: {
-        equals: and,
+        equals: slug,
       },
     });
   }
